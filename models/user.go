@@ -9,7 +9,7 @@ type (
 		Name       string `json:"name"`
 		Email      string `json:"email"`
 		Password   string `json:"password"`
-		Gander       string `json:"gander"`
+		Gender       string `json:"gender"`
 		CreatedAt time.Time `json:"createdAt"`
 		UpdatedAt time.Time `json:"updatedAt"`
 		IsActive int `json:"isActive"`

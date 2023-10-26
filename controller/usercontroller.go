@@ -13,7 +13,7 @@ type userInput struct {
 	Name      string    `json:"name"`
 	Email     string    `json:"email"`
 	Password  string    `json:"password"`
-	Gander    string    `json:"role"`
+	Gender    string    `json:"gender"`
 	CreatedAt time.Time `json:"createdAt"`
 	UpdatedAt time.Time `json:"updatedAt"`
 	IsActive  int       `json:"isActive"`
@@ -52,7 +52,7 @@ func CreateUser(c *gin.Context) {
     }
 
     // Create user
-    user := models.User{Name: input.Name, Email: input.Email, Password: input.Password, Gander: input.Gander, CreatedAt: time.Now(), UpdatedAt: time.Now(), IsActive: 1}
+    user := models.User{Name: input.Name, Email: input.Email, Password: input.Password, Gender: input.Gender, CreatedAt: time.Now(), UpdatedAt: time.Now(), IsActive: 1}
     db := c.MustGet("db").(*gorm.DB)
     db.Create(&user)
 
