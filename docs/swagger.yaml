@@ -1,5 +1,111 @@
 definitions:
+  controller.commentInput:
+    properties:
+      comment:
+        type: string
+      createdAt:
+        type: string
+      productsId:
+        type: integer
+      rating:
+        type: integer
+      updatedAt:
+        type: string
+      userIdComment:
+        type: integer
+    type: object
+  controller.productInput:
+    properties:
+      category:
+        type: string
+      createdAt:
+        type: string
+      descProduct:
+        type: string
+      gender:
+        type: string
+      images:
+        type: string
+      isActive:
+        type: integer
+      price:
+        type: integer
+      productName:
+        type: string
+      stock:
+        type: integer
+      updatedAt:
+        type: string
+      userId:
+        type: integer
+    type: object
+  controller.promotionInput:
+    properties:
+      createdAt:
+        type: string
+      isActive:
+        type: integer
+      productsId:
+        type: integer
+      promo:
+        type: integer
+      promoDesc:
+        type: string
+      promoName:
+        type: string
+      updatedAt:
+        type: string
+    type: object
+  controller.transactionInput:
+    properties:
+      createdAt:
+        type: string
+      name:
+        type: string
+      payment:
+        type: string
+      productsId:
+        type: integer
+      quantity:
+        type: integer
+      totalPrice:
+        type: string
+      userId:
+        type: integer
+    type: object
   controller.userInput:
+    properties:
+      createdAt:
+        type: string
+      email:
+        type: string
+      gender:
+        type: string
+      isActive:
+        type: integer
+      name:
+        type: string
+      password:
+        type: string
+      updatedAt:
+        type: string
+    type: object
+  models.Comments:
+    properties:
+      comment:
+        type: string
+      createdAt:
+        type: string
+      id:
+        type: integer
+      productsId:
+        type: integer
+      rating:
+        type: integer
+      updatedAt:
+        type: string
+      userIdComment:
+        type: integer
     type: object
   models.Products:
     properties:
@@ -51,11 +157,30 @@ definitions:
       updatedAt:
         type: string
     type: object
+  models.Transaction:
+    properties:
+      createdAt:
+        type: string
+      id:
+        type: integer
+      payment:
+        type: string
+      productsId:
+        type: integer
+      quantity:
+        type: integer
+      totalPrice:
+        type: string
+      userId:
+        type: integer
+    type: object
   models.User:
     properties:
       createdAt:
         type: string
       email:
+        type: string
+      gender:
         type: string
       id:
         type: integer
@@ -69,8 +194,6 @@ definitions:
         items:
           $ref: '#/definitions/models.Products'
         type: array
-      role:
-        type: string
       updatedAt:
         type: string
     type: object
@@ -84,6 +207,386 @@ info:
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: http://swagger.io/terms/
 paths:
+  /comment:
+    post:
+      description: Creating a new Comment.
+      parameters:
+      - description: the body to create a new Comments
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/controller.commentInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Comments'
+      summary: Create New Comment.
+      tags:
+      - Comments
+  /comment/{id}:
+    delete:
+      description: Delete a Comment by id.
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: boolean
+            type: object
+      summary: Delete one Comment.
+      tags:
+      - Comment
+    patch:
+      description: Update Comment by id.
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: the body to update comment
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/controller.commentInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Comments'
+      summary: Update Comment.
+      tags:
+      - Comments
+  /comment/{productsId}:
+    get:
+      description: Get a list of Comments in Products.
+      parameters:
+      - description: products id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Comments'
+            type: array
+      summary: Get all Comments.
+      tags:
+      - Comments
+  /comment/user/{useridcomment}:
+    get:
+      description: Get an Comment by UserIdComment.
+      parameters:
+      - description: User id comment
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Comments'
+      summary: Get comment.
+      tags:
+      - Comments
+  /product:
+    get:
+      description: Get a list of Products.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Products'
+            type: array
+      summary: Get all Products.
+      tags:
+      - Products
+    post:
+      description: Creating a new Products.
+      parameters:
+      - description: the body to create a new Products
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/controller.productInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Products'
+      summary: Create New Product.
+      tags:
+      - Products
+  /product/{id}:
+    delete:
+      description: Delete a Product by id.
+      parameters:
+      - description: Product id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: boolean
+            type: object
+      summary: Delete one Product.
+      tags:
+      - Products
+    get:
+      description: Get an Product by id.
+      parameters:
+      - description: Product id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Products'
+      summary: Get product.
+      tags:
+      - Products
+    patch:
+      description: Update Product by id.
+      parameters:
+      - description: Product id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: the body to update product
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/controller.productInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Products'
+      summary: Update Product.
+      tags:
+      - Products
+  /promotion:
+    get:
+      description: Get a list of Promotion.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Promotion'
+            type: array
+      summary: Get all Promotion.
+      tags:
+      - Promotion
+    post:
+      description: Creating a new Promotion.
+      parameters:
+      - description: the body to create a new promotion
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/controller.promotionInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Promotion'
+      summary: Create New Promotion.
+      tags:
+      - Promotion
+  /promotion/{id}:
+    delete:
+      description: Delete a Promotion by id.
+      parameters:
+      - description: User id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: boolean
+            type: object
+      summary: Delete one Promotion.
+      tags:
+      - Promotion
+    get:
+      description: Get a promo by id.
+      parameters:
+      - description: User id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Promotion'
+      summary: Get promo.
+      tags:
+      - Promotion
+    patch:
+      description: Update User by id.
+      parameters:
+      - description: User id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: the body to update promo
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/controller.promotionInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Promotion'
+      summary: Update Active Promo.
+      tags:
+      - Promotion
+  /transaction:
+    post:
+      description: Creating a new Transaction.
+      parameters:
+      - description: the body to create a new comment
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/controller.transactionInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Transaction'
+      summary: Create New Transaction.
+      tags:
+      - Transaction
+  /transaction/{id}:
+    get:
+      description: Get an Transaction by userId.
+      parameters:
+      - description: User id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Transaction'
+      summary: Get transaction.
+      tags:
+      - Transaction
+  /transaction/user/{id}:
+    get:
+      description: Get a list of transaction.
+      parameters:
+      - description: user id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Transaction'
+            type: array
+      summary: Get all Transaction By UserId.
+      tags:
+      - Transaction
+  /transation/{id}:
+    delete:
+      description: Delete a User by user id.
+      parameters:
+      - description: User id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: boolean
+            type: object
+      summary: Delete one Trannsaction.
+      tags:
+      - Transaction
   /users:
     get:
       description: Get a list of Users.

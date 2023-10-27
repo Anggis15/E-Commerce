@@ -2,6 +2,7 @@ package controller
 
 import (
 	"FP-BDS-Sanbercode-Go-50-anggi/models"
+	"fmt"
 	"net/http"
 	"time"
 
@@ -18,6 +19,51 @@ type userInput struct {
 	UpdatedAt time.Time `json:"updatedAt"`
 	IsActive  int       `json:"isActive"`
 }
+
+type LoginInput struct {
+    Email string `json:"username" binding:"required"`
+    Password string `json:"password" binding:"required"`
+}
+
+// LoginUser godoc
+// @Summary Login as as user.
+// @Description Logging in to get jwt token to access admin or user api by roles.
+// @Tags Auth
+// @Param Body body LoginInput true "the body to login a user"
+// @Produce json
+// @Success 200 {object} map[string]interface{}
+// @Router /user/login [post]
+func Login(c *gin.Context) {
+    db := c.MustGet("db").(*gorm.DB)
+    var input LoginInput
+
+    if err := c.ShouldBindJSON(&input); err != nil {
+        c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+        return
+    }
+
+    u := models.User{}
+
+    u.Email = input.Email
+    u.Password = input.Password
+
+    token, err := models.LoginCheck(u.Email, u.Password, db)
+
+    if err != nil {
+        fmt.Println(err)
+        c.JSON(http.StatusBadRequest, gin.H{"error": "username or password is incorrect."})
+        return
+    }
+
+    user := map[string]string{
+        "username": u.Email,
+        "email":    u.Name,
+    }
+
+    c.JSON(http.StatusOK, gin.H{"message": "login success", "user": user, "token": token})
+
+}
+
 
 // GetAllUsers godoc
 // @Summary Get all Users.
@@ -42,7 +88,7 @@ func GetAllUsers(c *gin.Context) {
 // @Param Body body userInput true "the body to create a new users"
 // @Produce json
 // @Success 200 {object} models.User
-// @Router /users [post]
+// @Router /users/registrasi [post]
 func CreateUser(c *gin.Context) {
     // Validate input
     var input userInput
@@ -52,7 +98,13 @@ func CreateUser(c *gin.Context) {
     }
 
     // Create user
-    user := models.User{Name: input.Name, Email: input.Email, Password: input.Password, Gender: input.Gender, CreatedAt: time.Now(), UpdatedAt: time.Now(), IsActive: 1}
+    user := models.User{Name: input.Name, 
+                        Email: input.Email, 
+                        Password: input.Password, 
+                        Gender: input.Gender, 
+                        CreatedAt: time.Now(), 
+                        UpdatedAt: time.Now(), 
+                        IsActive: 1}
     db := c.MustGet("db").(*gorm.DB)
     db.Create(&user)
 
@@ -63,6 +115,8 @@ func CreateUser(c *gin.Context) {
 // @Summary Get user.
 // @Description Get an User by id.
 // @Tags User
+// @Param Authorization header string true "Authorization. How to input in swagger : 'Bearer <insert_your_token_here>'"
+// @Security BearerToken
 // @Produce json
 // @Param id path string true "User id"
 // @Success 200 {object} models.User
@@ -83,6 +137,8 @@ func GetUserById(c *gin.Context) { // Get model if exist
 // @Summary Update User.
 // @Description Update User by id.
 // @Tags User
+// @Param Authorization header string true "Authorization. How to input in swagger : 'Bearer <insert_your_token_here>'"
+// @Security BearerToken
 // @Produce json
 // @Param id path string true "User id"
 // @Param Body body userInput true "the body to update user"
@@ -118,6 +174,8 @@ func UpdateUser(c *gin.Context) {
 // @Summary Delete one User.
 // @Description Delete a User by id.
 // @Tags User
+// @Param Authorization header string true "Authorization. How to input in swagger : 'Bearer <insert_your_token_here>'"
+// @Security BearerToken
 // @Produce json
 // @Param id path string true "User id"
 // @Success 200 {object} map[string]boolean

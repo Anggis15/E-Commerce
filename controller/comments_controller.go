@@ -96,7 +96,7 @@ func GetCommentByUserId(c *gin.Context) { // Get model if exist
 // @Produce json
 // @Param id path int true "id"
 // @Param Body body commentInput true "the body to update comment"
-// @Success 200 {object} models.Comment
+// @Success 200 {object} models.Comments
 // @Router /comment/{id} [patch]
 func UpdateComment(c *gin.Context) {
 

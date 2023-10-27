@@ -27,12 +27,12 @@ type transactionInput struct {
 // @Produce json
 // @Param id path int true "user id"
 // @Success 200 {object} []models.Transaction
-// @Router /transaction/{userId} [get]
+// @Router /transaction/user/{id} [get]
 func GetAllTransaction(c *gin.Context) {
     // get db from gin context
     db := c.MustGet("db").(*gorm.DB)
     var transaction []models.Transaction
-    if err := db.Where("user_id = ?", c.Param("userId")).Find(&transaction).Error; err != nil {
+    if err := db.Where("user_id = ?", c.Param("id")).Find(&transaction).Error; err != nil {
         c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
         return
     }

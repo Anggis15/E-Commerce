@@ -97,8 +97,8 @@ func GetProductById(c *gin.Context) { // Get model if exist
 // @Tags Products
 // @Produce json
 // @Param id path string true "Product id"
-// @Param Body body produtcInput true "the body to update product"
-// @Success 200 {object} models.Product
+// @Param Body body productInput true "the body to update product"
+// @Success 200 {object} models.Products
 // @Router /product/{id} [patch]
 func UpdateProduct(c *gin.Context) {
 
