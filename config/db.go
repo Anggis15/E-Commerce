@@ -2,6 +2,7 @@ package config
 
 import (
 	"FP-BDS-Sanbercode-Go-50-anggi/models"
+	"FP-BDS-Sanbercode-Go-50-anggi/utils"
 	"fmt"
 
 	"gorm.io/driver/mysql"
@@ -9,12 +10,13 @@ import (
 )
 
 func ConnectToDatabase() *gorm.DB{
-	username := "root"
-	password := "admin"
-	host := "tcp(127.0.0.1:3306)"
-	database := "clone_tokopedia"
+	username := utils.GetEnv("DATABASE_USERNAME", "root")
+  	password := utils.GetEnv("DATABASE_PASSWORD", "password")
+  	host := utils.GetEnv("DATABASE_HOST", "127.0.0.1")
+  	port := utils.GetEnv("DATABASE_PORT", "3306")
+  	database := utils.GetEnv("DATABASE_NAME", "clone_tokopedia")
 
-	dsn := fmt.Sprintf("%v:%v@%v/%v?charset=utf8mb4&parseTime=True&loc=Local", username, password, host, database)
+	dsn := fmt.Sprintf("%v:%v@tcp(%v:%v)/%v?charset=utf8mb4&parseTime=True&loc=Local", username, password, host, port, database)
 
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 

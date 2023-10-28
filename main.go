@@ -35,8 +35,8 @@ func main() {
 	docs.SwaggerInfo.Title = "Swagger Example API"
 	docs.SwaggerInfo.Description = "This is a sample server Ecomerce."
 	docs.SwaggerInfo.Version = "1.0"
-	docs.SwaggerInfo.Host = "localhost:8080"
-	docs.SwaggerInfo.Schemes = []string{"http", "https"}
+	// docs.SwaggerInfo.Host = "localhost:8080"
+	// docs.SwaggerInfo.Schemes = []string{"http", "https"}
 
 	
 	db := config.ConnectToDatabase()
@@ -44,5 +44,5 @@ func main() {
 	defer sqlDb.Close()
 
 	r := routes.SetUpRouter(db)
- 	r.Run("localhost:8080")
+ 	r.Run()
 }
