@@ -32,7 +32,7 @@ type LoginInput struct {
 // @Param Body body LoginInput true "the body to login a user"
 // @Produce json
 // @Success 200 {object} map[string]interface{}
-// @Router /user/login [post]
+// @Router /users/login [post]
 func Login(c *gin.Context) {
     db := c.MustGet("db").(*gorm.DB)
     var input LoginInput

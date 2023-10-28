@@ -19,13 +19,13 @@ func SetUpRouter(db *gorm.DB) *gin.Engine{
 
 	// User
 	r.GET("/users", controller.GetAllUsers)
-	r.POST("/user/login", controller.Login)
+	r.POST("/users/login", controller.Login)
 	r.POST("/users/registrasi", controller.CreateUser)
 	// r.GET("/users/:id", controller.GetUserById)
 	// r.PATCH("/users/:id", controller.UpdateUser)
 	// r.DELETE("/users/:id", controller.DeleteUser)
 
-	userMiddleWare := r.Group("/user")
+	userMiddleWare := r.Group("/users")
 	userMiddleWare.Use(middlewares.JwtAuthMiddleware())
 	userMiddleWare.GET("/:id", controller.GetUserById)
 	userMiddleWare.PATCH("/:id", controller.UpdateUser)
