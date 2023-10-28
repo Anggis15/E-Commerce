@@ -40,6 +40,8 @@ func GetAllPromotion(c *gin.Context) {
 // @Description Creating a new Promotion.
 // @Tags Promotion
 // @Param Body body promotionInput true "the body to create a new promotion"
+// @Param Authorization header string true "Authorization. How to input in swagger : 'Bearer <insert_your_token_here>'"
+// @Security BearerToken
 // @Produce json
 // @Success 200 {object} models.Promotion
 // @Router /promotion [post]
@@ -71,6 +73,8 @@ func CreatePromotion(c *gin.Context) {
 // @Summary Get promo.
 // @Description Get a promo by id.
 // @Tags Promotion
+// @Param Authorization header string true "Authorization. How to input in swagger : 'Bearer <insert_your_token_here>'"
+// @Security BearerToken
 // @Produce json
 // @Param id path string true "User id"
 // @Success 200 {object} models.Promotion
@@ -79,7 +83,7 @@ func GetPromoById(c *gin.Context) { // Get model if exist
     var promo models.Promotion
 
     db := c.MustGet("db").(*gorm.DB)
-    if err := db.Where("id = ?", c.Param("id")).First(&promo).Error; err != nil {
+    if err := db.Where("products_id = ?", c.Param("id")).First(&promo).Error; err != nil {
         c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
         return
     }
@@ -91,6 +95,8 @@ func GetPromoById(c *gin.Context) { // Get model if exist
 // @Summary Update Active Promo.
 // @Description Update User by id.
 // @Tags Promotion
+// @Param Authorization header string true "Authorization. How to input in swagger : 'Bearer <insert_your_token_here>'"
+// @Security BearerToken
 // @Produce json
 // @Param id path string true "User id"
 // @Param Body body promotionInput true "the body to update promo"
@@ -126,6 +132,8 @@ func UpdatePromotion(c *gin.Context) {
 // @Summary Delete one Promotion.
 // @Description Delete a Promotion by id.
 // @Tags Promotion
+// @Param Authorization header string true "Authorization. How to input in swagger : 'Bearer <insert_your_token_here>'"
+// @Security BearerToken
 // @Produce json
 // @Param id path int true "User id"
 // @Success 200 {object} map[string]boolean

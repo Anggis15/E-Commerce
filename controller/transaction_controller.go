@@ -2,6 +2,7 @@ package controller
 
 import (
 	"FP-BDS-Sanbercode-Go-50-anggi/models"
+	"FP-BDS-Sanbercode-Go-50-anggi/service"
 	"net/http"
 	"strconv"
 	"time"
@@ -24,6 +25,8 @@ type transactionInput struct {
 // @Summary Get all Transaction By UserId.
 // @Description Get a list of transaction.
 // @Tags Transaction
+// @Param Authorization header string true "Authorization. How to input in swagger : 'Bearer <insert_your_token_here>'"
+// @Security BearerToken
 // @Produce json
 // @Param id path int true "user id"
 // @Success 200 {object} []models.Transaction
@@ -45,6 +48,8 @@ func GetAllTransaction(c *gin.Context) {
 // @Description Creating a new Transaction.
 // @Tags Transaction
 // @Param Body body transactionInput true "the body to create a new comment"
+// @Param Authorization header string true "Authorization. How to input in swagger : 'Bearer <insert_your_token_here>'"
+// @Security BearerToken
 // @Produce json
 // @Success 200 {object} models.Transaction
 // @Router /transaction [post]
@@ -62,7 +67,7 @@ func CreateTransaction(c *gin.Context) {
 		UserId: input.UserId,
 		ProductsId: input.ProductsId,
 		Quantity: input.Quantity,
-		TotalPrice: strconv.Itoa(input.Quantity * 1000),
+		TotalPrice: strconv.Itoa(service.GetTotalTransaction(input.ProductsId, "localhost:8080")*input.Quantity),
 		CreatedAt: time.Now(),
 		Payment: input.Payment,
 	}
@@ -76,6 +81,8 @@ func CreateTransaction(c *gin.Context) {
 // @Summary Get transaction.
 // @Description Get an Transaction by userId.
 // @Tags Transaction
+// @Param Authorization header string true "Authorization. How to input in swagger : 'Bearer <insert_your_token_here>'"
+// @Security BearerToken
 // @Produce json
 // @Param id path int true "User id"
 // @Success 200 {object} models.Transaction
@@ -97,6 +104,8 @@ func GetTransactionByUserId(c *gin.Context) { // Get model if exist
 // @Summary Delete one Trannsaction.
 // @Description Delete a User by user id.
 // @Tags Transaction
+// @Param Authorization header string true "Authorization. How to input in swagger : 'Bearer <insert_your_token_here>'"
+// @Security BearerToken
 // @Produce json
 // @Param id path int true "User id"
 // @Success 200 {object} map[string]boolean

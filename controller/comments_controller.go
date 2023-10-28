@@ -43,6 +43,8 @@ func GetAllComments(c *gin.Context) {
 // @Description Creating a new Comment.
 // @Tags Comments
 // @Param Body body commentInput true "the body to create a new Comments"
+// @Param Authorization header string true "Authorization. How to input in swagger : 'Bearer <insert_your_token_here>'"
+// @Security BearerToken
 // @Produce json
 // @Success 200 {object} models.Comments
 // @Router /comment [post]
@@ -73,6 +75,8 @@ func CreateComment(c *gin.Context) {
 // @Summary Get comment.
 // @Description Get an Comment by UserIdComment.
 // @Tags Comments
+// @Param Authorization header string true "Authorization. How to input in swagger : 'Bearer <insert_your_token_here>'"
+// @Security BearerToken
 // @Produce json
 // @Param id path int true "User id comment"
 // @Success 200 {object} models.Comments
@@ -93,6 +97,8 @@ func GetCommentByUserId(c *gin.Context) { // Get model if exist
 // @Summary Update Comment.
 // @Description Update Comment by id.
 // @Tags Comments
+// @Param Authorization header string true "Authorization. How to input in swagger : 'Bearer <insert_your_token_here>'"
+// @Security BearerToken
 // @Produce json
 // @Param id path int true "id"
 // @Param Body body commentInput true "the body to update comment"
@@ -128,6 +134,8 @@ func UpdateComment(c *gin.Context) {
 // @Summary Delete one Comment.
 // @Description Delete a Comment by id.
 // @Tags Comment
+// @Param Authorization header string true "Authorization. How to input in swagger : 'Bearer <insert_your_token_here>'"
+// @Security BearerToken 
 // @Produce json
 // @Param id path int true "id"
 // @Success 200 {object} map[string]boolean

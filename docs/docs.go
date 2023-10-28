@@ -26,6 +26,11 @@ const docTemplate = `{
     "paths": {
         "/comment": {
             "post": {
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ],
                 "description": "Creating a new Comment.",
                 "produces": [
                     "application/json"
@@ -43,6 +48,13 @@ const docTemplate = `{
                         "schema": {
                             "$ref": "#/definitions/controller.commentInput"
                         }
+                    },
+                    {
+                        "type": "string",
+                        "description": "Authorization. How to input in swagger : 'Bearer \u003cinsert_your_token_here\u003e'",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -57,6 +69,11 @@ const docTemplate = `{
         },
         "/comment/user/{useridcomment}": {
             "get": {
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ],
                 "description": "Get an Comment by UserIdComment.",
                 "produces": [
                     "application/json"
@@ -66,6 +83,13 @@ const docTemplate = `{
                 ],
                 "summary": "Get comment.",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization. How to input in swagger : 'Bearer \u003cinsert_your_token_here\u003e'",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "type": "integer",
                         "description": "User id comment",
@@ -86,6 +110,11 @@ const docTemplate = `{
         },
         "/comment/{id}": {
             "delete": {
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ],
                 "description": "Delete a Comment by id.",
                 "produces": [
                     "application/json"
@@ -95,6 +124,13 @@ const docTemplate = `{
                 ],
                 "summary": "Delete one Comment.",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization. How to input in swagger : 'Bearer \u003cinsert_your_token_here\u003e'",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "type": "integer",
                         "description": "id",
@@ -116,6 +152,11 @@ const docTemplate = `{
                 }
             },
             "patch": {
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ],
                 "description": "Update Comment by id.",
                 "produces": [
                     "application/json"
@@ -125,6 +166,13 @@ const docTemplate = `{
                 ],
                 "summary": "Update Comment.",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization. How to input in swagger : 'Bearer \u003cinsert_your_token_here\u003e'",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "type": "integer",
                         "description": "id",
@@ -207,6 +255,11 @@ const docTemplate = `{
                 }
             },
             "post": {
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ],
                 "description": "Creating a new Products.",
                 "produces": [
                     "application/json"
@@ -224,6 +277,13 @@ const docTemplate = `{
                         "schema": {
                             "$ref": "#/definitions/controller.productInput"
                         }
+                    },
+                    {
+                        "type": "string",
+                        "description": "Authorization. How to input in swagger : 'Bearer \u003cinsert_your_token_here\u003e'",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -265,6 +325,11 @@ const docTemplate = `{
                 }
             },
             "delete": {
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ],
                 "description": "Delete a Product by id.",
                 "produces": [
                     "application/json"
@@ -274,6 +339,13 @@ const docTemplate = `{
                 ],
                 "summary": "Delete one Product.",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization. How to input in swagger : 'Bearer \u003cinsert_your_token_here\u003e'",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "type": "string",
                         "description": "Product id",
@@ -295,6 +367,11 @@ const docTemplate = `{
                 }
             },
             "patch": {
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ],
                 "description": "Update Product by id.",
                 "produces": [
                     "application/json"
@@ -304,6 +381,13 @@ const docTemplate = `{
                 ],
                 "summary": "Update Product.",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization. How to input in swagger : 'Bearer \u003cinsert_your_token_here\u003e'",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "type": "string",
                         "description": "Product id",
@@ -354,6 +438,11 @@ const docTemplate = `{
                 }
             },
             "post": {
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ],
                 "description": "Creating a new Promotion.",
                 "produces": [
                     "application/json"
@@ -371,6 +460,13 @@ const docTemplate = `{
                         "schema": {
                             "$ref": "#/definitions/controller.promotionInput"
                         }
+                    },
+                    {
+                        "type": "string",
+                        "description": "Authorization. How to input in swagger : 'Bearer \u003cinsert_your_token_here\u003e'",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -385,6 +481,11 @@ const docTemplate = `{
         },
         "/promotion/{id}": {
             "get": {
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ],
                 "description": "Get a promo by id.",
                 "produces": [
                     "application/json"
@@ -394,6 +495,13 @@ const docTemplate = `{
                 ],
                 "summary": "Get promo.",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization. How to input in swagger : 'Bearer \u003cinsert_your_token_here\u003e'",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "type": "string",
                         "description": "User id",
@@ -412,6 +520,11 @@ const docTemplate = `{
                 }
             },
             "delete": {
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ],
                 "description": "Delete a Promotion by id.",
                 "produces": [
                     "application/json"
@@ -421,6 +534,13 @@ const docTemplate = `{
                 ],
                 "summary": "Delete one Promotion.",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization. How to input in swagger : 'Bearer \u003cinsert_your_token_here\u003e'",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "type": "integer",
                         "description": "User id",
@@ -442,6 +562,11 @@ const docTemplate = `{
                 }
             },
             "patch": {
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ],
                 "description": "Update User by id.",
                 "produces": [
                     "application/json"
@@ -451,6 +576,13 @@ const docTemplate = `{
                 ],
                 "summary": "Update Active Promo.",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization. How to input in swagger : 'Bearer \u003cinsert_your_token_here\u003e'",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "type": "string",
                         "description": "User id",
@@ -480,6 +612,11 @@ const docTemplate = `{
         },
         "/transaction": {
             "post": {
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ],
                 "description": "Creating a new Transaction.",
                 "produces": [
                     "application/json"
@@ -497,6 +634,13 @@ const docTemplate = `{
                         "schema": {
                             "$ref": "#/definitions/controller.transactionInput"
                         }
+                    },
+                    {
+                        "type": "string",
+                        "description": "Authorization. How to input in swagger : 'Bearer \u003cinsert_your_token_here\u003e'",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -511,6 +655,11 @@ const docTemplate = `{
         },
         "/transaction/user/{id}": {
             "get": {
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ],
                 "description": "Get a list of transaction.",
                 "produces": [
                     "application/json"
@@ -520,6 +669,13 @@ const docTemplate = `{
                 ],
                 "summary": "Get all Transaction By UserId.",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization. How to input in swagger : 'Bearer \u003cinsert_your_token_here\u003e'",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "type": "integer",
                         "description": "user id",
@@ -543,6 +699,11 @@ const docTemplate = `{
         },
         "/transaction/{id}": {
             "get": {
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ],
                 "description": "Get an Transaction by userId.",
                 "produces": [
                     "application/json"
@@ -552,6 +713,13 @@ const docTemplate = `{
                 ],
                 "summary": "Get transaction.",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization. How to input in swagger : 'Bearer \u003cinsert_your_token_here\u003e'",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "type": "integer",
                         "description": "User id",
@@ -572,6 +740,11 @@ const docTemplate = `{
         },
         "/transation/{id}": {
             "delete": {
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ],
                 "description": "Delete a User by user id.",
                 "produces": [
                     "application/json"
@@ -581,6 +754,13 @@ const docTemplate = `{
                 ],
                 "summary": "Delete one Trannsaction.",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization. How to input in swagger : 'Bearer \u003cinsert_your_token_here\u003e'",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "type": "integer",
                         "description": "User id",
@@ -597,6 +777,38 @@ const docTemplate = `{
                             "additionalProperties": {
                                 "type": "boolean"
                             }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/login": {
+            "post": {
+                "description": "Logging in to get jwt token to access admin or user api by roles.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Login as as user.",
+                "parameters": [
+                    {
+                        "description": "the body to login a user",
+                        "name": "Body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/controller.LoginInput"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
                         }
                     }
                 }
@@ -623,7 +835,9 @@ const docTemplate = `{
                         }
                     }
                 }
-            },
+            }
+        },
+        "/users/registrasi": {
             "post": {
                 "description": "Creating a new User.",
                 "produces": [
@@ -656,6 +870,11 @@ const docTemplate = `{
         },
         "/users/{id}": {
             "get": {
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ],
                 "description": "Get an User by id.",
                 "produces": [
                     "application/json"
@@ -665,6 +884,13 @@ const docTemplate = `{
                 ],
                 "summary": "Get user.",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization. How to input in swagger : 'Bearer \u003cinsert_your_token_here\u003e'",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "type": "string",
                         "description": "User id",
@@ -683,6 +909,11 @@ const docTemplate = `{
                 }
             },
             "delete": {
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ],
                 "description": "Delete a User by id.",
                 "produces": [
                     "application/json"
@@ -692,6 +923,13 @@ const docTemplate = `{
                 ],
                 "summary": "Delete one User.",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization. How to input in swagger : 'Bearer \u003cinsert_your_token_here\u003e'",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "type": "string",
                         "description": "User id",
@@ -713,6 +951,11 @@ const docTemplate = `{
                 }
             },
             "patch": {
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ],
                 "description": "Update User by id.",
                 "produces": [
                     "application/json"
@@ -722,6 +965,13 @@ const docTemplate = `{
                 ],
                 "summary": "Update User.",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization. How to input in swagger : 'Bearer \u003cinsert_your_token_here\u003e'",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "type": "string",
                         "description": "User id",
@@ -751,6 +1001,21 @@ const docTemplate = `{
         }
     },
     "definitions": {
+        "controller.LoginInput": {
+            "type": "object",
+            "required": [
+                "password",
+                "username"
+            ],
+            "properties": {
+                "password": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                }
+            }
+        },
         "controller.commentInput": {
             "type": "object",
             "properties": {

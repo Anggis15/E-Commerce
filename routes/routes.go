@@ -27,9 +27,9 @@ func SetUpRouter(db *gorm.DB) *gin.Engine{
 
 	userMiddleWare := r.Group("/user")
 	userMiddleWare.Use(middlewares.JwtAuthMiddleware())
-	userMiddleWare.GET("/users/:id", controller.GetUserById)
-	userMiddleWare.PATCH("/users/:id", controller.UpdateUser)
-	userMiddleWare.DELETE("/users/:id", controller.DeleteUser)
+	userMiddleWare.GET("/:id", controller.GetUserById)
+	userMiddleWare.PATCH("/:id", controller.UpdateUser)
+	userMiddleWare.DELETE("/:id", controller.DeleteUser)
 
 	// Products
 	r.GET("/product", controller.GetAllProduct)
@@ -40,9 +40,9 @@ func SetUpRouter(db *gorm.DB) *gin.Engine{
 
 	productMiddleWare := r.Group("/product")
 	productMiddleWare.Use(middlewares.JwtAuthMiddleware())
-	productMiddleWare.POST("/product", controller.CreateProduct)
-	productMiddleWare.PATCH("/product/:id", controller.UpdateProduct)
-	productMiddleWare.DELETE("/product/:id", controller.DeleteProduct)
+	productMiddleWare.POST("/", controller.CreateProduct)
+	productMiddleWare.PATCH("/:id", controller.UpdateProduct)
+	productMiddleWare.DELETE("/:id", controller.DeleteProduct)
 
 	// Transaction
 
@@ -53,26 +53,34 @@ func SetUpRouter(db *gorm.DB) *gin.Engine{
 
 	transactionMiddleWare := r.Group("/transaction")
 	transactionMiddleWare.Use(middlewares.JwtAuthMiddleware())
-	transactionMiddleWare.GET("/transaction/user/:id", controller.GetAllTransaction)
-	transactionMiddleWare.POST("/transaction", controller.CreateTransaction)
-	transactionMiddleWare.GET("/transaction/:id", controller.GetTransactionByUserId)
-	transactionMiddleWare.DELETE("/transaction/:id", controller.DeleteTransation)
+	transactionMiddleWare.GET("/user/:id", controller.GetAllTransaction)
+	transactionMiddleWare.POST("/", controller.CreateTransaction)
+	transactionMiddleWare.GET("/:id", controller.GetTransactionByUserId)
+	transactionMiddleWare.DELETE("/:id", controller.DeleteTransation)
 
 	// Comment
 	r.GET("/comment/{productsId}", controller.GetAllComments)
 	// r.POST("/comment", controller.CreateComment)
 	// r.GET("/comment/user/:useridcomment", controller.GetCommentByUserId)
 	// r.POST("/comment/:id", controller.UpdateComment)
-	r.DELETE("/comment/:id", controller.DeleteCommet)
+	// r.DELETE("/comment/:id", controller.DeleteCommet)
 
 	commentMiddleWare := r.Group("/comment")
 	commentMiddleWare.Use(middlewares.JwtAuthMiddleware())
-	commentMiddleWare.POST("/comment", controller.CreateComment)
-	commentMiddleWare.GET("/comment/user/:useridcomment", controller.GetCommentByUserId)
-	commentMiddleWare.POST("/comment/:id", controller.UpdateComment)
-	commentMiddleWare.DELETE("/comment/:id", controller.DeleteCommet)
+	commentMiddleWare.POST("/", controller.CreateComment)
+	commentMiddleWare.GET("/user/:useridcomment", controller.GetCommentByUserId)
+	commentMiddleWare.POST("/:id", controller.UpdateComment)
+	commentMiddleWare.DELETE("/:id", controller.DeleteCommet)
+
+	r.GET("/promo", controller.GetAllPromotion)
+	promoMiddleWare := r.Group("/promo")
+	promoMiddleWare.Use(middlewares.JwtAuthMiddleware())
+	promoMiddleWare.POST("/promo", controller.CreatePromotion)
+	promoMiddleWare.GET("/:id", controller.GetPromoById)
+	promoMiddleWare.PATCH("/:id", controller.UpdatePromotion)
+	promoMiddleWare.DELETE("/:id", controller.DeletePromotion)
 	
-	commentMiddleWare.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	return r
 }
