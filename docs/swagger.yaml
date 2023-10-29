@@ -540,11 +540,6 @@ paths:
     get:
       description: Get a promo by id.
       parameters:
-      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
-        in: header
-        name: Authorization
-        required: true
-        type: string
       - description: User id
         in: path
         name: id
@@ -557,8 +552,6 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.Promotion'
-      security:
-      - BearerToken: []
       summary: Get promo.
       tags:
       - Promotion

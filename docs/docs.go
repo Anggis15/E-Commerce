@@ -481,11 +481,6 @@ const docTemplate = `{
         },
         "/promotion/{id}": {
             "get": {
-                "security": [
-                    {
-                        "BearerToken": []
-                    }
-                ],
                 "description": "Get a promo by id.",
                 "produces": [
                     "application/json"
@@ -495,13 +490,6 @@ const docTemplate = `{
                 ],
                 "summary": "Get promo.",
                 "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Authorization. How to input in swagger : 'Bearer \u003cinsert_your_token_here\u003e'",
-                        "name": "Authorization",
-                        "in": "header",
-                        "required": true
-                    },
                     {
                         "type": "string",
                         "description": "User id",
