@@ -67,7 +67,7 @@ func CreateTransaction(c *gin.Context) {
 		UserId: input.UserId,
 		ProductsId: input.ProductsId,
 		Quantity: input.Quantity,
-		TotalPrice: strconv.Itoa(service.GetTotalTransaction(input.ProductsId, "localhost:8080")*input.Quantity),
+		TotalPrice: strconv.Itoa(service.GetTotalTransaction(input.ProductsId, "fp-bds-sanbercode-go-50-anggi-production-fc8c.up.railway.app")*input.Quantity),
 		CreatedAt: time.Now(),
 		Payment: input.Payment,
 	}
