@@ -73,8 +73,6 @@ func CreatePromotion(c *gin.Context) {
 // @Summary Get promo.
 // @Description Get a promo by id.
 // @Tags Promotion
-// @Param Authorization header string true "Authorization. How to input in swagger : 'Bearer <insert_your_token_here>'"
-// @Security BearerToken
 // @Produce json
 // @Param id path string true "User id"
 // @Success 200 {object} models.Promotion

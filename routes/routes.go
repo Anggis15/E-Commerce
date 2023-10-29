@@ -73,10 +73,11 @@ func SetUpRouter(db *gorm.DB) *gin.Engine{
 	commentMiddleWare.DELETE("/:id", controller.DeleteCommet)
 
 	r.GET("/promo", controller.GetAllPromotion)
+	r.GET("/promo/:id", controller.GetPromoById)
 	promoMiddleWare := r.Group("/promo")
 	promoMiddleWare.Use(middlewares.JwtAuthMiddleware())
 	promoMiddleWare.POST("/promo", controller.CreatePromotion)
-	promoMiddleWare.GET("/:id", controller.GetPromoById)
+	// promoMiddleWare.GET("/:id", controller.GetPromoById)
 	promoMiddleWare.PATCH("/:id", controller.UpdatePromotion)
 	promoMiddleWare.DELETE("/:id", controller.DeletePromotion)
 	
